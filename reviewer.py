@@ -9,7 +9,9 @@ PR_NUMBER = os.getenv("PR_NUMBER")
 
 def analyze_code_placeholder(diff_text: str) -> str:
     """Fake AI reviewer for now."""
-    return "🤖 (Placeholder) I looked at the changes. Looks fine for now!"
+    return "🤖 (Placeholder) I looked at the changes. Looks fine for now!" \
+    "n\n" \
+    "The changes made were:\n" + diff_text
 
 def main():
     gh = Github(auth=Auth.Token(GITHUB_TOKEN))
