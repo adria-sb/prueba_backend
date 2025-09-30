@@ -7,7 +7,7 @@ export interface Event {
 
 export const battery = {
     charge: 0,
-    maxCapacity: 10,
+    maxCapacity: 20,
     lastUpdated: new Date()
 };
 
