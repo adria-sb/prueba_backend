@@ -1,5 +1,5 @@
 import sys
-from github import Github
+from github import Github, Auth
 import os
 
 # Inputs from environment
@@ -12,9 +12,13 @@ def analyze_code_placeholder(diff_text: str) -> str:
     return "🤖 (Placeholder) I looked at the changes. Looks fine for now!"
 
 def main():
-    gh = Github(GITHUB_TOKEN)
+    gh = Github(auth=Auth.Token(GITHUB_TOKEN))
     repo = gh.get_repo(REPO_NAME)
     pr = repo.get_pull(int(PR_NUMBER))
+
+    if pr.head.repo.full_name != repo.full_name:
+        print("Skipping forked PR: cannot comment with GITHUB_TOKEN")
+        return
 
     changed_files = pr.get_files()
     diffs = []
