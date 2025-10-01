@@ -66,7 +66,7 @@ def main():
         print("No relevant code changes to review.")
         return
     
-    review_text = analyze_code_placeholder(diff_text)
+    review_text = analyze_code_placeholder(file_diffs)
     pr.create_issue_comment(review_text)
     print("Review comment posted successfully.")
 
