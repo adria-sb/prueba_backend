@@ -54,18 +54,11 @@ def main():
         if not is_relevant_file(file.filename):
             print(f"Skipping non-code file: {file.filename}")
             continue
-        
-        if not file.patch:
-            print(f"No diff available for file: {file.filename}")
-            if file.status == "added":
-                try:
-                    file_content = repo.get_contents(file.filename, ref=pr.head.ref).decoded_content.decode("utf-8")
-                    file_diffs.append((file.filename, f"NEW FILE CONTENT:\n{file_content}"))
-                    print(f"Fetched content for new file: {file.filename}")
-                except Exception as e:
-                    print(f"Could not fetch contents of {file.filename}: {e}")
-            continue
 
+        if not file.patch:
+            print(f"No patch available for file: {file.filename}")
+            continue
+        
         cleaned_patch = parse_patch(file.patch)
         file_diffs.append((file.filename, cleaned_patch))
 
