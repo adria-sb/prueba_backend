@@ -59,7 +59,7 @@ def main():
             print(f"No patch available for file: {file.filename}")
             continue
         
-        cleaned_patch = parse_patch(f.patch)
+        cleaned_patch = parse_patch(file.patch)
         file_diffs.append((file.filename, cleaned_patch))
 
     if not file_diffs:
